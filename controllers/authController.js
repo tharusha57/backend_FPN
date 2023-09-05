@@ -8,7 +8,6 @@ const createToken = async (_id, role) => {
     })
 }
 
-
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
@@ -33,7 +32,7 @@ const registerUser =  async(req,res) => {
             email , password : hash , username , role
         })
 
-        const token = createToken(user._id , role)
+        const token = await createToken(user._id , role)
 
         res.status(201).json({
             username , role , token
@@ -43,11 +42,5 @@ const registerUser =  async(req,res) => {
         res.status(400).json({error : error.message})
     }
 }
-
-
-
-
-
-
 
 module.exports = { loginUser , registerUser}
